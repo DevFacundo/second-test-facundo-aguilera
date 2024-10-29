@@ -22,7 +22,7 @@ public class Main {
             String question = scanner.nextLine();
 
             if (question.equalsIgnoreCase("y")) {
-                System.out.println("Entry the quantitu of new kits: ");
+                System.out.println("Entry the quantity of new kits: ");
                 ssm.setKitsQuantity(30);
                 System.out.println("Kits quantity updated");
             }
