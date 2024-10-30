@@ -8,25 +8,38 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         ObjectMapper mapper = new ObjectMapper();
-        SSMManager ssm = new SSMManager(20);
+        SSMManager ssm = new SSMManager(3);
         Scanner scanner = new Scanner(System.in);
         File fileReport = new File("filereport.json");
         File urgentFile = new File("urgent.dat");
-        try {
-            ssm.personRegister("Facundo", "Aguilera", 31, "La Florida", 37867025, "LifeGuard");
-            ssm.personRegister("Sofía", "Martínez", 28, "Alfar", 98765432, "Nurse");
-            ssm.personRegister("Lucas", "Pérez", 35, "San Jose", 12345678, "Engineer");
-            ssm.personRegister("Valentina", "González", 24, "Constitucion", 45678901, "Student");
-        } catch (ItDoesntHaveKitsException e) {
-            System.out.println("¿Can u get more kits? y/n");
-            String question = scanner.nextLine();
 
-            if (question.equalsIgnoreCase("y")) {
-                System.out.println("Entry the quantity of new kits: ");
-                ssm.setKitsQuantity(30);
-                System.out.println("Kits quantity updated");
+        boolean keep = true;
+        while (keep)
+        {
+            try {
+                ssm.personRegister("Facundo", "Aguilera", 31, "La Florida", 37867025, "LifeGuard");
+                ssm.personRegister("Sofía", "Martínez", 28, "Alfar", 98765432, "Nurse");
+                ssm.personRegister("Lucas", "Pérez", 35, "San Jose", 12345678, "Engineer");
+                ssm.personRegister("Valentina", "González", 24, "Constitucion", 45678901, "Student");
+
+            } catch (ItDoesntHaveKitsException e) {
+                System.out.println("¿Can u get more kits? y/n");
+                String question = scanner.nextLine();
+
+                if (question.equalsIgnoreCase("y")) {
+                    System.out.println("Entry the quantity of new kits: ");
+                    Integer quant = scanner.nextInt();
+                    scanner.nextLine();
+                    ssm.setKitsQuantity(quant);
+                    System.out.println("Kits quantity updated");
+                }
+                else {
+                    System.out.println("We Dont have more kits");
+                    keep=false;
+                }
             }
         }
+
         //TESTING PERSONS
         ssm.tester();
 
